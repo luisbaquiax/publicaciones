@@ -1,4 +1,4 @@
-# publicaciones
+# Publicaciones
 # Installing Laravel on Linux
 
 This guide provides step-by-step instructions for installing Laravel on a Linux system.
