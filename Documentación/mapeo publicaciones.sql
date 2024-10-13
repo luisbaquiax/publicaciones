@@ -23,6 +23,8 @@ CREATE TABLE publicacion(
     titulo TEXT,
     lugar TEXT,
     fecha DATE NOT NULL,
+    hora_inicio TIME NOT NULL,
+    hora_finalizacion TIME NOT NULL,
     cupos INT NOT NULL,
     url TEXT,
     username VARCHAR(45) NOT NULL,
