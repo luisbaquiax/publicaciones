@@ -1,9 +1,10 @@
 INSERT INTO users (username, password, email, rol, nombre, apellido, telefono, estado) VALUES
-('luis_baquiax', 'pass1234', 'luis@example.com', 'admin', 'Luis', 'Baquiax', '12345678', 'activo'),
-('maria_hernandez', 'pass2345', 'maria@example.com', 'usuario', 'Maria', 'Hernandez', '87654321', 'activo'),
-('jose_gomez', 'pass3456', 'jose@example.com', 'moderador', 'Jose', 'Gomez', '11223344', 'activo'),
-('ana_lopez', 'pass4567', 'ana@example.com', 'usuario', 'Ana', 'Lopez', '55667788', 'activo'),
-('carlos_martinez', 'pass5678', 'carlos@example.com', 'usuario', 'Carlos', 'Martinez', '44332211', 'inactivo');
+('luis_baquiax', 'pass1234', 'luis@example.com', 'USUARIO', 'Luis', 'Baquiax', '12345678', 'ACTIVO'),
+('maria_hernandez', 'pass2345', 'maria@example.com', 'USUARIO', 'Maria', 'Hernandez', '87654321', 'ACTIVO'),
+('jose_gomez', 'pass3456', 'jose@example.com', 'USUARIO', 'Jose', 'Gomez', '11223344', 'ACTIVO'),
+('ana_lopez', 'pass4567', 'ana@example.com', 'USUARIO', 'Ana', 'Lopez', '55667788', 'ACTIVO'),
+('carlos_martinez', 'pass5678', 'carlos@example.com', 'USUARIO', 'Carlos', 'Martinez', '44332211', 'DESACTIVADO'),
+('useradmin', 'admin', 'admin@example.com', 'admin', 'ADMIN', 'admin', '00000000', 'ACTIVO');
 
 INSERT INTO tipo_publico (tipo_publico) VALUES
 ('Estudiantes'),
@@ -11,26 +12,26 @@ INSERT INTO tipo_publico (tipo_publico) VALUES
 ('Docentes'),
 ('Publico General');
 
-INSERT INTO publicacion (titulo, lugar, fecha, cupos, url, username, estado) VALUES
-('Conferencia de Programación', 'Sala A', '2024-10-01', 100, 'http://confprog.com', 'luis_baquiax', 'disponible'),
-('Seminario de Ciberseguridad', 'Auditorio', '2024-10-05', 150, 'http://ciberseminar.com', 'luis_baquiax', 'disponible'),
-('Charla sobre Inteligencia Artificial', 'Sala B', '2024-10-10', 80, 'http://iacharla.com', 'luis_baquiax', 'lleno'),
+INSERT INTO publicacion (titulo, lugar, fecha, hora_inicio, cupos, url, username, estado) VALUES
+('Conferencia de Programación', 'Sala A', '2024-10-01', '10:00', 100, 'http://confprog.com', 'luis_baquiax', 'ACEPTADO'),
+('Seminario de Ciberseguridad', 'Auditorio', '2024-10-05', '10:00', 150, 'http://ciberseminar.com', 'luis_baquiax', 'ACEPTADO'),
+('Charla sobre Inteligencia Artificial', 'Sala B', '2024-10-10', '10:00', 80, 'http://iacharla.com', 'luis_baquiax', 'ACEPTADO'),
 
-('Taller de UX/UI', 'Sala C', '2024-10-02', 50, 'http://uxtaller.com', 'maria_hernandez', 'disponible'),
-('Conferencia de Diseño Web', 'Sala D', '2024-10-06', 70, 'http://diseñoweb.com', 'maria_hernandez', 'disponible'),
-('Curso de Frontend', 'Sala E', '2024-10-12', 40, 'http://frontendcourse.com', 'maria_hernandez', 'cancelado'),
+('Taller de UX/UI', 'Sala C', '2024-10-02', '10:00', 50, 'http://uxtaller.com', 'maria_hernandez', 'ACEPTADO'),
+('Conferencia de Diseño Web', 'Sala D', '2024-10-06', '10:00', 70, 'http://diseñoweb.com', 'maria_hernandez', 'ACEPTADO'),
+('Curso de Frontend', 'Sala E', '2024-10-12', '10:00', 40, 'http://frontendcourse.com', 'maria_hernandez', 'ACEPTADO'),
 
-('Seminario de Backend', 'Auditorio', '2024-10-03', 120, 'http://backendseminar.com', 'jose_gomez', 'disponible'),
-('Conferencia de Bases de Datos', 'Sala F', '2024-10-07', 90, 'http://dbconference.com', 'jose_gomez', 'disponible'),
-('Charla de DevOps', 'Sala G', '2024-10-13', 60, 'http://devopscharla.com', 'jose_gomez', 'disponible'),
+('Seminario de Backend', 'Auditorio', '2024-10-03', '10:00', 120, 'http://backendseminar.com', 'jose_gomez', 'ACEPTADO'),
+('Conferencia de Bases de Datos', 'Sala F', '2024-10-07', '10:00', 90, 'http://dbconference.com', 'jose_gomez', 'ACEPTADO'),
+('Charla de DevOps', 'Sala G', '2024-10-13', '10:00', 60, 'http://devopscharla.com', 'jose_gomez', 'ACEPTADO'),
 
-('Workshop de Docker', 'Sala H', '2024-10-04', 30, 'http://dockerworkshop.com', 'ana_lopez', 'disponible'),
-('Conferencia de Kubernetes', 'Auditorio', '2024-10-08', 200, 'http://kubernetesconf.com', 'ana_lopez', 'disponible'),
-('Taller de Cloud Computing', 'Sala I', '2024-10-14', 25, 'http://cloudtaller.com', 'ana_lopez', 'disponible'),
+('Workshop de Docker', 'Sala H', '2024-10-04', '10:00', 30, 'http://dockerworkshop.com', 'ana_lopez', 'ACEPTADO'),
+('Conferencia de Kubernetes', 'Auditorio', '2024-10-08', '10:00', 200, 'http://kubernetesconf.com', 'ana_lopez', 'ACEPTADO'),
+('Taller de Cloud Computing', 'Sala I', '2024-10-14', '10:00', 25, 'http://cloudtaller.com', 'ana_lopez', 'ACEPTADO'),
 
-('Seminario de Seguridad en Redes', 'Auditorio', '2024-10-09', 110, 'http://redesseminar.com', 'carlos_martinez', 'disponible'),
-('Charla sobre IoT', 'Sala J', '2024-10-11', 80, 'http://iotcharla.com', 'carlos_martinez', 'disponible'),
-('Conferencia de Big Data', 'Sala K', '2024-10-15', 100, 'http://bigdataconf.com', 'carlos_martinez', 'cancelado');
+('Seminario de Seguridad en Redes', 'Auditorio', '2024-10-09', '10:00', 110, 'http://redesseminar.com', 'carlos_martinez', 'ACEPTADO'),
+('Charla sobre IoT', 'Sala J', '2024-10-11', '10:00', 80, 'http://iotcharla.com', 'carlos_martinez', 'ACEPTADO'),
+('Conferencia de Big Data', 'Sala K', '2024-10-15', '10:00', 100, 'http://bigdataconf.com', 'carlos_martinez', 'RECHAZADO');
 
 INSERT INTO publico (id_publicacion, tipo_publico) VALUES
 (1, 'Estudiantes'),
@@ -55,4 +56,35 @@ INSERT INTO publico (id_publicacion, tipo_publico) VALUES
 (14, 'Publico General'),
 
 (15, 'Publico General');
+
+INSERT INTO motivo(nombre) VALUES
+('Inadecuado'),
+('Contenido no apto para menores'),
+('No me gusta'),
+('Causa controversia'),
+('Otro');
+
+// trigger para actualizar el estado de una publicacion si tiene al menos 3 reportes
+DELIMITER $$
+
+CREATE TRIGGER verificar_cantidad_reporte
+AFTER INSERT ON reporte
+FOR EACH ROW
+BEGIN
+    -- Verifica cuántos reportes tiene la publicación
+    DECLARE num_reportes INT;
+
+    SELECT COUNT(*) INTO num_reportes
+    FROM reporte
+    WHERE id_publicacion = NEW.id_publicacion;
+
+    -- Si tiene 3 o más reportes, oculta la publicación
+    IF num_reportes >= 3 THEN
+        UPDATE publicacion
+        SET estado = 'OCULTA'
+        WHERE id = NEW.id_publicacion;
+    END IF;
+END$$
+
+DELIMITER ;verificar_cantidad_reporte
 

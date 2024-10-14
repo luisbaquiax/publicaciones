@@ -14,6 +14,7 @@ class Publicacion extends Model
         "titulo",
         "lugar",
         "fecha",
+        "hora_inicio",
         "cupos",
         "url",
         "username",
