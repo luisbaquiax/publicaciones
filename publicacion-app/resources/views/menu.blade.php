@@ -26,11 +26,15 @@
                             aria-expanded="false">
                         <i class="fa-solid fa-user mx-2"></i>{{ session("user")->username }}
                     </button>
-                    <ul class="dropdown-menu bg-dark" style="left: -1px">
+                    <ul class="dropdown-menu bg-dark" style="left: -30px">
                         <li><a class="dropdown-item bg-dark text-white" href="#">Mi perfil</a></li>
                         <li><a class="dropdown-item bg-dark text-white"
                                href="{{ route("users.mispublicaciones", session("user")->username) }}">Mis
                                 publicaciones</a></li>
+                        <li><a class="dropdown-item bg-dark text-white"
+                               href="/form-publicacion">
+                                Crear una publicacion
+                            </a></li>
                         <li><a class="dropdown-item bg-dark text-white" href="{{ route("users.singout") }}"><i
                                     class="fa-solid fa-right-from-bracket"></i> Salir</a></li>
                     </ul>

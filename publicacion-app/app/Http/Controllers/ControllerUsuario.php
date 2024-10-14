@@ -21,14 +21,14 @@ class ControllerUsuario extends Controller
             if($usuario->password == $password){
                 if($usuario->rol === TipoUsuario::ADMIN->value){
                     session(['user' => $usuario]);
-                    return view("admin.adminPublicaciones")->with("publicaciones", Publicacion::all());
+                    return view("admin.admin-publicaciones")->with("publicaciones", Publicacion::all());
                 }else{
                     if($usuario->estado === EstadoUsuario::ACTIVO->value){
                         session(['user' => $usuario]);
                         session(['editar' => '0']);
                         //view("publicaciones")
                         return redirect()->route('publicacion.list')
-                            ->with("info","Bienvenido a tu perfil!!!")
+                            ->with("info","Bienvenido a tu perfil 😄 !!!")
                             ->with("publicaciones", Publicacion::where("username","!=",$usuario->username)
                                 ->where('estado', '=', EstadoPublicacion::ACEPTADO->value)
                                 ->get());

@@ -4,7 +4,7 @@ INSERT INTO users (username, password, email, rol, nombre, apellido, telefono, e
 ('jose_gomez', 'pass3456', 'jose@example.com', 'USUARIO', 'Jose', 'Gomez', '11223344', 'ACTIVO'),
 ('ana_lopez', 'pass4567', 'ana@example.com', 'USUARIO', 'Ana', 'Lopez', '55667788', 'ACTIVO'),
 ('carlos_martinez', 'pass5678', 'carlos@example.com', 'USUARIO', 'Carlos', 'Martinez', '44332211', 'DESACTIVADO'),
-('useradmin', 'admin', 'admin@example.com', 'admin', 'ADMIN', 'admin', '00000000', 'ACTIVO');
+('useradmin', 'admin', 'admin@example.com', 'ADMIN', 'ADMIN', 'ADMIN', '00000000', 'ACTIVO');
 
 INSERT INTO tipo_publico (tipo_publico) VALUES
 ('Estudiantes'),

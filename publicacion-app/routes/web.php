@@ -18,7 +18,9 @@ Route::get("/publicacion/{filtro}/filter",[ControllerPublicacion::class, "filter
     ->name("publicacion.filter");
 Route::get("/users/{username}/mispublicaciones",[ControllerPublicacion::class, "listByUsername"])
     ->name("users.mispublicaciones");
+Route::get("/admin/publicaciones",[ControllerPublicacion::class, "getAll"])->name("publicacion.getAll");
+Route::get("/form-publicacion",[ControllerPublicacion::class, "formPublicacion"])->name("publicacion.formPublicacion");
+Route::post("/createPublicacion",[ControllerPublicacion::class, "create"])->name("publicacion.create");
 Route::post("/loginUser",[ControllerUsuario::class, "search"])->name("users.search");
 Route::get("/singout",[ControllerUsuario::class, "signOut"])->name("users.singout");
-Route::get("/admin/publicaciones",[ControllerPublicacion::class, "getAll"])->name("publicacion.getAll");
 Route::post("/crearReporte", [ControllerReporte::class, "create"])->name("report.create");

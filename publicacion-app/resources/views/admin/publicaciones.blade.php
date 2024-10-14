@@ -13,6 +13,8 @@
                         <strong>Lugar: <i class="fa-solid fa-location-dot"></i></strong> {{ $p->lugar }}
                         <strong>Fecha: <i class="fa-solid fa-calendar-days"></i></strong> {{ $p->fecha }}
                         <strong>Cupos:</strong> {{ $p->cupos }}
+                        <strong>Estado:</strong> {{ $p->estado }}
+                        <strong>Tipo de publico:</strong> {{ $p->estado }}
                     </div>
                     <div class="col-3">
                         <a class="btn btn-info btn-sm">

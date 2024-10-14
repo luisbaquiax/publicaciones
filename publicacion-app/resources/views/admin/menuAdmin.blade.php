@@ -12,7 +12,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Reportes</a>
                     <ul class="dropdown-menu bg-dark text-white">
-                        <li><a class="dropdown-item bg-dark text-white" href="#">Reportados</a></li>
+                        <li><a class="dropdown-item bg-dark text-white" href="#">Publicaciones reportados</a></li>
                         <li><a class="dropdown-item bg-dark text-white" href="#">Action</a></li>
                     </ul>
                 </li>

@@ -6,5 +6,6 @@ enum EstadoPublicacion: string
     case RECHAZADO = "RECHAZADO";
     case ELIMINADO = "ELIMINADO";
     case OCULTA = "OCULTA";
+    case SOLICITADO = "SOLICITADO";
 
 }

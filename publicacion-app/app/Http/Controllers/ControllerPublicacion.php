@@ -5,12 +5,61 @@ namespace App\Http\Controllers;
 use App\Http\Enums\EstadoPublicacion;
 use App\Models\Categoria;
 use App\Models\Publicacion;
+use App\Models\Publico;
+use App\Models\TipoPublico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Laravel\Prompts\Table;
 
 class ControllerPublicacion extends Controller
 {
+
+    public function formPublicacion(){
+        return view('create-publicacion');
+    }
+
+    public function create(){
+        if(session('user')){
+            $titulo = request('titulo');
+            $lugar = request('lugar');
+            $fecha = request('fecha');
+            $hora = request('hora');
+            $cupos = request('cupos');
+            $url = '';
+            $username = session('user')->username;
+            $publico = request('publico');
+            $estado = EstadoPublicacion::SOLICITADO->value;
+
+            $publicacion = Publicacion::create([
+                'titulo' => $titulo,
+                'lugar' => $lugar,
+                'fecha' => $fecha,
+                'hora_inicio' => $hora,
+                'cupos' => $cupos,
+                'url' => $url,
+                'username' => $username,
+                'estado' => $estado,
+            ]);
+
+            if($publicacion){
+                $publicaciones = Publicacion::orderByDesc('id')->get();
+                $ultimaPublicacion = $publicaciones->first();
+                foreach ($publico as $p){
+                    Publico::create([
+                        'id_publicacion' => $ultimaPublicacion->id,
+                        'tipo_publico' => $p,
+                    ]);
+                }
+                return redirect()->route('publicacion.list')
+                    ->with('success','Se ha creado tu publicación');
+            }else{
+                return redirect()->route('publicacion.list')
+                    ->with('not-success','No se pudo crear tu publicación.');
+            }
+        }else{
+            return redirect()->route('/');
+        }
+    }
     //
     public function list()
     {
@@ -30,7 +79,7 @@ class ControllerPublicacion extends Controller
 
     public function getAll()
     {
-        return view('admin/adminPublicaciones')
+        return view('admin/admin-publicaciones')
             ->with('publicaciones', Publicacion::all());
     }
 
