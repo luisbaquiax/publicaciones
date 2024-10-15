@@ -25,10 +25,16 @@ class ControllerPublicacion extends Controller
             $fecha = request('fecha');
             $hora = request('hora');
             $cupos = request('cupos');
-            $url = '';
+            $url = 'url indefinido';
             $username = session('user')->username;
             $publico = request('publico');
             $estado = EstadoPublicacion::SOLICITADO->value;
+
+            $userPublicaciones = Publicacion::where('username', '=', $username)
+                ->where('estado', EstadoPublicacion::ACEPTADO->value);
+            if($userPublicaciones->count() > 2){
+                $estado = EstadoPublicacion::ACEPTADO->value;
+            }
 
             $publicacion = Publicacion::create([
                 'titulo' => $titulo,

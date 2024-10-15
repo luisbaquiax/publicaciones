@@ -38,6 +38,7 @@
 <main class="container">
     <div class="row">
         <div class="col">
+            @include('messages-alert')
             @include("admin.publicaciones")
         </div>
     </div>

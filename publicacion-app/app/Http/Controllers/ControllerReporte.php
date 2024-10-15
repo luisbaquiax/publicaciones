@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Enums\EstadoReporte;
+use App\Http\Enums\TipoUsuario;
 use App\Models\Reporte;
 use Illuminate\Http\Request;
 
@@ -9,7 +11,13 @@ class ControllerReporte extends Controller
 {
     //
     public function list(){
-
+        if(!session('user')){
+            return redirect()->route('login');
+        }else if (session('user')->rol === TipoUsuario::ADMIN->value){
+            return view('admin.admin-reporte')->with('reportes', Reporte::orderBy('id', 'asc')->get());
+        }else{
+            return redirect()->route('login');
+        }
     }
 
     public function create(){
@@ -34,6 +42,19 @@ class ControllerReporte extends Controller
             return back()->with('success','Se ha reportado la publicación exitosamente');
         }else{
             return back()>with('not-success','No se pudo reportar la publicación');
+        }
+    }
+
+    public function update(){
+        $id = request('id');
+        $reporte = Reporte::find($id);
+        $estado = request('estado');
+        $reporte->estado = $estado;
+        $reporte->save();
+        if($reporte){
+            return back()->with('success', 'Reporte actualizado exitosamente.');
+        }else{
+            return back()->with('not-success', 'No se pudo actualizar el reporte.');
         }
     }
 }
