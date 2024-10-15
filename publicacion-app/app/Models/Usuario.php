@@ -20,6 +20,7 @@ class Usuario extends Model
         "nombre",
         "apellido",
         "telefono",
-        "estado"
+        "estado",
+        "puede_publicar"
     ];
 }

@@ -45,16 +45,15 @@ class ControllerReporte extends Controller
         }
     }
 
-    public function update(){
-        $id = request('id');
-        $reporte = Reporte::find($id);
-        $estado = request('estado');
+    public function update($id, $estado){
+        echo $id." ".$estado;
+        /*$reporte = Reporte::find($id);
         $reporte->estado = $estado;
         $reporte->save();
         if($reporte){
             return back()->with('success', 'Reporte actualizado exitosamente.');
         }else{
             return back()->with('not-success', 'No se pudo actualizar el reporte.');
-        }
+        }*/
     }
 }

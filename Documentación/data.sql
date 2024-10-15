@@ -1,10 +1,10 @@
-INSERT INTO users (username, password, email, rol, nombre, apellido, telefono, estado) VALUES
-('luis_baquiax', 'pass1234', 'luis@example.com', 'USUARIO', 'Luis', 'Baquiax', '12345678', 'ACTIVO'),
-('maria_hernandez', 'pass2345', 'maria@example.com', 'USUARIO', 'Maria', 'Hernandez', '87654321', 'ACTIVO'),
-('jose_gomez', 'pass3456', 'jose@example.com', 'USUARIO', 'Jose', 'Gomez', '11223344', 'ACTIVO'),
-('ana_lopez', 'pass4567', 'ana@example.com', 'USUARIO', 'Ana', 'Lopez', '55667788', 'ACTIVO'),
-('carlos_martinez', 'pass5678', 'carlos@example.com', 'USUARIO', 'Carlos', 'Martinez', '44332211', 'DESACTIVADO'),
-('useradmin', 'admin', 'admin@example.com', 'ADMIN', 'ADMIN', 'ADMIN', '00000000', 'ACTIVO');
+INSERT INTO users (username, password, email, rol, nombre, apellido, telefono, estado, puede_publicar) VALUES
+('luis_baquiax', 'pass1234', 'luis@example.com', 'USUARIO', 'Luis', 'Baquiax', '12345678', 'ACTIVO', 'NO'),
+('maria_hernandez', 'pass2345', 'maria@example.com', 'USUARIO', 'Maria', 'Hernandez', '87654321', 'ACTIVO', 'NO'),
+('jose_gomez', 'pass3456', 'jose@example.com', 'USUARIO', 'Jose', 'Gomez', '11223344', 'ACTIVO', 'NO'),
+('ana_lopez', 'pass4567', 'ana@example.com', 'USUARIO', 'Ana', 'Lopez', '55667788', 'ACTIVO', 'NO'),
+('carlos_martinez', 'pass5678', 'carlos@example.com', 'USUARIO', 'Carlos', 'Martinez', '44332211', 'DESACTIVADO', 'NO'),
+('useradmin', 'admin', 'admin@example.com', 'ADMIN', 'ADMIN', 'ADMIN', '00000000', 'ACTIVO', 'NO');
 
 INSERT INTO tipo_publico (tipo_publico) VALUES
 ('Estudiantes'),
@@ -86,5 +86,27 @@ BEGIN
     END IF;
 END$$
 
-DELIMITER ;verificar_cantidad_reporte
+DELIMITER ;
+
+//trigger para actualizar si un USUARIO puede publicar de manera automatica
+DELIMITER $$
+
+CREATE TRIGGER actualizar_estado_usuario
+BEFORE INSERT ON publicacion
+FOR EACH ROW
+BEGIN
+    DECLARE cantidad_publicacion INT;
+
+    SELECT COUNT(*) INTO cantidad_publicacion
+    FROM publicacion
+    WHERE username = NEW.username AND estado = 'ACEPTADO';
+
+    IF cantidad_publicacion >= 2 THEN
+        UPDATE users
+        SET puede_publicar = 'SI'
+        WHERE username = NEW.username;
+    END IF;
+END$$
+
+DELIMITER ;
 

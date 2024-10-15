@@ -11,6 +11,7 @@ CREATE TABLE users(
     apellido VARCHAR(45) NOT NULL,
     telefono VARCHAR(8) NOT NULL,
     estado VARCHAR(15) NOT NULL,
+    puede_publicar VARCHAR(5) NOT NULL,
     PRIMARY KEY(username)
 );
 

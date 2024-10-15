@@ -9,20 +9,18 @@
                 <div class="row">
                     <div class="col-9">
                         <strong>Codigo: </strong> {{ $p->id }}
+                        <strong>Solicitante: </strong> {{ $p->username }}
                         <strong>Lugar: <i class="fa-solid fa-location-dot"></i></strong> {{ $p->lugar }}
                         <strong>Fecha: <i class="fa-solid fa-calendar-days"></i></strong> {{ $p->fecha }}
                         <strong>Cupos:</strong> {{ $p->cupos }}
                         <strong>Estado:</strong> {{ $p->estado }}
                     </div>
                     <div class="col-3">
-                        <a class="btn btn-info btn-sm">
+                        <a class="btn btn-info btn-sm" href="{{ route("publicacion.updateState", ['id'=> $p->id, 'estado'=> \App\Http\Enums\EstadoPublicacion::ACEPTADO]) }}">
                             <i class="fa-solid fa-thumbs-up"></i>Autorizar
                         </a>
-                        <a class="btn btn-danger btn-sm">
+                        <a class="btn btn-danger btn-sm" href="{{ route("publicacion.updateState", ['id'=> $p->id, 'estado'=> \App\Http\Enums\EstadoPublicacion::RECHAZADO]) }}">
                             <i class="fa-solid fa-thumbs-down"></i>Rechazar
-                        </a>
-                        <a class="btn btn-dark btn-sm">
-                            <i class="fa-regular fa-trash-can"></i>
                         </a>
                     </div>
                 </div>

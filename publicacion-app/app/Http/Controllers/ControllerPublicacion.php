@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Enums\EstadoPublicacion;
+use App\Http\Enums\TipoUsuario;
 use App\Models\Categoria;
 use App\Models\Publicacion;
 use App\Models\Publico;
@@ -66,15 +67,35 @@ class ControllerPublicacion extends Controller
             return redirect()->route('/');
         }
     }
-    //
+
+    public function updateState($id, $estado)
+    {
+        try {
+            $publicacion = Publicacion::find($id);
+            $publicacion->estado = $estado;
+            $publicacion->save();
+            if($estado === EstadoPublicacion::ACEPTADO->value){
+                return back()->with('success','Se ha aprobado la publicación');
+            }else if($estado === EstadoPublicacion::RECHAZADO->value){
+                return back()->with('not-success', 'Se ha rechazado la publicación');
+            }else{
+                return back();
+            }
+        }catch (\Exception $exception){
+            return back()->with('not-success', 'Se pudo actualizar la publicacion'.$exception->getMessage());
+        }
+    }
+
     public function list()
     {
         session(['editar' => '0']);
         if(session('user')){
+            if(session('user')->rol === TipoUsuario::ADMIN->value){
+                return redirect()->route('publicacion.getAll');
+            }
             $publicaciones = Publicacion::where('estado','=',EstadoPublicacion::ACEPTADO->value)
                 ->where('username', '!=', session('user')->username)
                 ->get();
-
         }else{
             $publicaciones = Publicacion::where('estado','=',EstadoPublicacion::ACEPTADO->value)->get();
         }
@@ -109,7 +130,7 @@ class ControllerPublicacion extends Controller
             $publicaciones = Publicacion::join('publico', 'publicacion.id', '=', 'publico.id_publicacion')
                 ->where('publico.tipo_publico', request('filtro'))
                 ->where('publicacion.estado', '=', EstadoPublicacion::ACEPTADO->value)
-                ->where('publicacion.username', '=', session('user')->username)
+                ->where('publicacion.username', '!=', session('user')->username)
                 ->select('publicacion.id', 'publicacion.titulo', 'publicacion.lugar', 'publicacion.fecha', 'publicacion.cupos', 'publicacion.url', 'publicacion.username', 'publicacion.estado')
                 ->get();
         }else{

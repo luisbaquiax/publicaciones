@@ -23,7 +23,7 @@
                         <th>{{ $r->motivo }}</th>
                         <th>{{ $r->username }}</th>
                         <td>
-                            <a class="btn btn-info btn-sm">
+                            <a class="btn btn-info btn-sm" href="{{ route("report.update", ['id'=>$r->id, 'estado' =>$EstadoReporte::APROVADO->value]) }}">
                                 <i class="fa-solid fa-thumbs-up"></i>Aprobar
                             </a>
                             <a class="btn btn-danger btn-sm">

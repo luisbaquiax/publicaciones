@@ -21,7 +21,7 @@ class ControllerUsuario extends Controller
             if($usuario->password == $password){
                 if($usuario->rol === TipoUsuario::ADMIN->value){
                     session(['user' => $usuario]);
-                    return view("admin.admin-publicaciones")->with("publicaciones", Publicacion::all());
+                    return redirect()->route('publicacion.getAll')->with("publicaciones", Publicacion::all());
                 }else{
                     if($usuario->estado === EstadoUsuario::ACTIVO->value){
                         session(['user' => $usuario]);
