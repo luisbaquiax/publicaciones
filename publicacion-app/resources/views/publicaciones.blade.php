@@ -57,21 +57,37 @@
                 @php $index = 0; @endphp
                 @foreach($publicaciones as $p)
                     <div class="card mb-3">
-                        <div class="card-header bg-dark">
-                            <h6 class="text-center text-white"><strong>{{ $p->titulo }}</strong></h6>
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="colo-11">
+                                    <h6 class="text-center"> #{{ ++$index }} <strong>{{ $p->titulo }}</strong></h6>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-9">
-                                    {{ ++$index }}
-                                    <strong>Lugar: <i class="fa-solid fa-location-dot"></i></strong> {{ $p->lugar }}
-                                    <strong>Fecha: <i class="fa-solid fa-calendar-days"></i></strong> {{ $p->fecha }}
-                                    <strong><i class="fa-solid fa-clock"></i> </strong> {{ $p->hora_inicio }}
-                                    <strong>Cupos disponibles:</strong> {{ $p->cupos }}
+                                    <div class="row">
+                                        <div class="col">
+                                            <strong><i class="fa-solid fa-location-dot"></i>Lugar:<br>
+                                            </strong> {{ $p->lugar }}
+                                        </div>
+                                        <div class="col">
+                                            <strong><i class="fa-solid fa-calendar-days"></i>Fecha:<br>
+                                            </strong> {{ $p->fecha }}
+                                        </div>
+                                        <div class="col">
+                                            <strong><i class="fa-solid fa-clock"></i>Hora de inicio:<br>
+                                            </strong> {{ $p->hora_inicio }}
+                                        </div>
+                                        <div class="col">
+                                            <strong>Cupos disponibles:</strong> {{ $p->cupos }}
+                                        </div>
+                                    </div>
                                     @if(session('user'))
-                                       @if(session('user')->username == $p->username)
+                                        @if(session('user')->username == $p->username)
                                             <strong>Estado:</strong> {{ $p->estado }}
-                                       @endif
+                                        @endif
                                     @endif
                                 </div>
                                 <div class="col-3">
@@ -84,7 +100,9 @@
                                         </a>
                                     @else
                                         @if(session()->has("user"))
-                                            <a class="btn btn-primary btn-sm">
+                                            <a class="btn btn-primary btn-sm"
+                                               href="{{ route('asistencia.asistir', ['username'=>session('user')->username, 'idPublicacion' => $p->id]) }}"
+                                               onclick="return accion()">
                                                 <i class="fa-solid fa-check-double"></i>Asistir
                                             </a>
                                             <a class="btn btn-danger btn-sm" data-bs-toggle="modal"
@@ -98,8 +116,8 @@
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header text-bg-dark text-center">
-                                                            <h1 class="modal-title fs-5 mx-3"><strong>Reportar
-                                                                    anuncio:</strong></h1>
+                                                            <h1 class="modal-title fs-5 mx-3">
+                                                                <strong>Reportar anuncio:</strong></h1>
                                                             <h1 class="modal-title fs-5">{{ $p->titulo }}</h1>
                                                             <button type="button" class="btn-close"
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
@@ -111,9 +129,9 @@
                                                                     <input type="hidden" name="username"
                                                                            value="{{ session("user")->username }}">
                                                                     <input type="hidden" name="id" value="{{ $p->id }}">
-                                                                    <label for="motivos" class="form-label">Seleccione
-                                                                        el motivo del reporte de esta
-                                                                        publicación</label>
+                                                                    <label for="motivos" class="form-label">
+                                                                        Seleccione el motivo del reporte de esta publicación
+                                                                    </label>
                                                                     <select name="motivo"
                                                                             class="form-select form-select-lg mb-3"
                                                                             aria-label="Large select example">
@@ -157,6 +175,11 @@
         </div>
     </div>
 
+    <script>
+        let accion = function () {
+            return confirm("¿Desea asistir al evento?");
+        }
+    </script>
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

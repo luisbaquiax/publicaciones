@@ -31,12 +31,6 @@ class ControllerPublicacion extends Controller
             $publico = request('publico');
             $estado = EstadoPublicacion::SOLICITADO->value;
 
-            $userPublicaciones = Publicacion::where('username', '=', $username)
-                ->where('estado', EstadoPublicacion::ACEPTADO->value);
-            if($userPublicaciones->count() > 2){
-                $estado = EstadoPublicacion::ACEPTADO->value;
-            }
-
             $publicacion = Publicacion::create([
                 'titulo' => $titulo,
                 'lugar' => $lugar,
@@ -95,9 +89,10 @@ class ControllerPublicacion extends Controller
             }
             $publicaciones = Publicacion::where('estado','=',EstadoPublicacion::ACEPTADO->value)
                 ->where('username', '!=', session('user')->username)
+                ->orderBy('fecha','desc')
                 ->get();
         }else{
-            $publicaciones = Publicacion::where('estado','=',EstadoPublicacion::ACEPTADO->value)->get();
+            $publicaciones = Publicacion::where('estado','=',EstadoPublicacion::ACEPTADO->value)->orderBy('fecha','desc')->get();
         }
 
         return view('publicaciones')
@@ -132,12 +127,14 @@ class ControllerPublicacion extends Controller
                 ->where('publicacion.estado', '=', EstadoPublicacion::ACEPTADO->value)
                 ->where('publicacion.username', '!=', session('user')->username)
                 ->select('publicacion.id', 'publicacion.titulo', 'publicacion.lugar', 'publicacion.fecha', 'publicacion.cupos', 'publicacion.url', 'publicacion.username', 'publicacion.estado')
+                ->orderBy('fecha','desc')
                 ->get();
         }else{
             $publicaciones = Publicacion::join('publico', 'publicacion.id', '=', 'publico.id_publicacion')
                 ->where('publico.tipo_publico', request('filtro'))
                 ->where('publicacion.estado', '=', EstadoPublicacion::ACEPTADO->value)
                 ->select('publicacion.id', 'publicacion.titulo', 'publicacion.lugar', 'publicacion.fecha', 'publicacion.cupos', 'publicacion.url', 'publicacion.username', 'publicacion.estado')
+                ->orderBy('fecha','desc')
                 ->get();
         }
         return view('publicaciones')

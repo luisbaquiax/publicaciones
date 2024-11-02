@@ -6,9 +6,10 @@ use App\Http\Enums\EstadoReporte;
 use App\Http\Enums\TipoUsuario;
 use App\Models\Reporte;
 use Illuminate\Http\Request;
-
+date_default_timezone_set("America/Guatemala");
 class ControllerReporte extends Controller
 {
+
     //
     public function list(){
         if(!session('user')){
@@ -36,7 +37,8 @@ class ControllerReporte extends Controller
             'id_publicacion' => $id_publicacion,
             'motivo' => $motivo,
             'fecha' => date("Y-m-d"),
-            'username' => $useranme
+            'username' => $useranme,
+            'estado' => EstadoReporte::ACTIVO->value,
         ]);
         if($reporte){
             return back()->with('success','Se ha reportado la publicación exitosamente');
@@ -46,14 +48,14 @@ class ControllerReporte extends Controller
     }
 
     public function update($id, $estado){
-        echo $id." ".$estado;
-        /*$reporte = Reporte::find($id);
+        $reporte = Reporte::find($id);
         $reporte->estado = $estado;
         $reporte->save();
-        if($reporte){
-            return back()->with('success', 'Reporte actualizado exitosamente.');
+        echo $reporte->estado;
+        if($estado === EstadoReporte::APROVADO->value){
+            return back()->with('success', 'Reporte Aprobado.');
         }else{
-            return back()->with('not-success', 'No se pudo actualizar el reporte.');
-        }*/
+            return back()->with('not-success', 'Reporte rechazado.');
+        }
     }
 }

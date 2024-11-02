@@ -60,6 +60,7 @@ CREATE TABLE reporte(
     motivo VARCHAR(45) NOT NULL,
     fecha DATE NOT NULL,
     username VARCHAR(45),
+    estado VARCHAR(45),
     PRIMARY KEY(id),
     FOREIGN KEY(id_publicacion) REFERENCES publicacion(id),
     FOREIGN KEY(motivo) REFERENCES motivo(nombre),

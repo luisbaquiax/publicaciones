@@ -14,6 +14,7 @@ class Reporte extends Model
         "id_publicacion",
         "motivo",
         "fecha",
-        "username"
+        "username",
+        "estado"
     ];
 }

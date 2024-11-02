@@ -16,9 +16,11 @@
                         <strong>Estado:</strong> {{ $p->estado }}
                     </div>
                     <div class="col-3">
-                        <a class="btn btn-info btn-sm" href="{{ route("publicacion.updateState", ['id'=> $p->id, 'estado'=> \App\Http\Enums\EstadoPublicacion::ACEPTADO]) }}">
-                            <i class="fa-solid fa-thumbs-up"></i>Autorizar
-                        </a>
+                        @if($p->estado == 'SOLICITADO')
+                            <a class="btn btn-info btn-sm" href="{{ route("publicacion.updateState", ['id'=> $p->id, 'estado'=> \App\Http\Enums\EstadoPublicacion::ACEPTADO]) }}">
+                                <i class="fa-solid fa-thumbs-up"></i>Autorizar
+                            </a>
+                        @endif
                         <a class="btn btn-danger btn-sm" href="{{ route("publicacion.updateState", ['id'=> $p->id, 'estado'=> \App\Http\Enums\EstadoPublicacion::RECHAZADO]) }}">
                             <i class="fa-solid fa-thumbs-down"></i>Rechazar
                         </a>

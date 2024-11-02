@@ -64,49 +64,4 @@ INSERT INTO motivo(nombre) VALUES
 ('Causa controversia'),
 ('Otro');
 
-// trigger para actualizar el estado de una publicacion si tiene al menos 3 reportes
-DELIMITER $$
-
-CREATE TRIGGER verificar_cantidad_reporte
-AFTER INSERT ON reporte
-FOR EACH ROW
-BEGIN
-    -- Verifica cuántos reportes tiene la publicación
-    DECLARE num_reportes INT;
-
-    SELECT COUNT(*) INTO num_reportes
-    FROM reporte
-    WHERE id_publicacion = NEW.id_publicacion;
-
-    -- Si tiene 3 o más reportes, oculta la publicación
-    IF num_reportes >= 3 THEN
-        UPDATE publicacion
-        SET estado = 'OCULTA'
-        WHERE id = NEW.id_publicacion;
-    END IF;
-END$$
-
-DELIMITER ;
-
-//trigger para actualizar si un USUARIO puede publicar de manera automatica
-DELIMITER $$
-
-CREATE TRIGGER actualizar_estado_usuario
-BEFORE INSERT ON publicacion
-FOR EACH ROW
-BEGIN
-    DECLARE cantidad_publicacion INT;
-
-    SELECT COUNT(*) INTO cantidad_publicacion
-    FROM publicacion
-    WHERE username = NEW.username AND estado = 'ACEPTADO';
-
-    IF cantidad_publicacion >= 2 THEN
-        UPDATE users
-        SET puede_publicar = 'SI'
-        WHERE username = NEW.username;
-    END IF;
-END$$
-
-DELIMITER ;
 

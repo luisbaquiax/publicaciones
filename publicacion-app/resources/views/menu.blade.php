@@ -18,7 +18,7 @@
                         <i class="fa-regular fa-bell"></i>
                     </button>
                     <ul class="dropdown-menu bg-dark" style="left: -1px">
-                        <li><a class="dropdown-item bg-dark text-white" href="#">Eventos proximos</a></li>
+                        <li><a class="dropdown-item bg-dark text-white" href="{{ route('notificacion.listar', ['username' => session('user')->username]) }}">Eventos proximos</a></li>
                     </ul>
                 </div>
                 <div class="dropdown">
