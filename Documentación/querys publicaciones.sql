@@ -1,4 +1,4 @@
-
+º
 // trigger para actualizar el estado de una publicacion si tiene al menos 3 reportes
 DELIMITER $$
 

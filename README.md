@@ -1,5 +1,41 @@
 # Publicaciones
-# Installing Laravel on Linux
+
+# Application Installation
+
+1. **Download or clone the application** from the link: [https://github.com/luisbaquiax/publicaciones](https://github.com/luisbaquiax/publicaciones)
+2. **Clone the project**: to clone the project, select a directory to clone it into and optionally create a folder to store the source code.
+   - **On Windows**  
+     Run:  
+     ```bash
+     git clone https://github.com/luisbaquiax/publicaciones.git
+     ```
+   - **On Linux**  
+     Run:  
+     ```bash
+     git clone git@github.com:luisbaquiax/publicaciones.git
+     ```
+
+# Start the Application
+
+1. **Using Laravel's development server**  
+   In the main application folder `publicacion-app`, run:
+   ```bash
+   php artisan serve
+
+This command starts a local web server without needing a full web server setup like Apache or another. Then, use the following URL to load the application: http://127.0.0.1:8000/
+
+1. **Using Apache Server of Xampp**  
+
+Place Your Project in `htdocs`
+
+Start Apache of Xampp
+
+Open the Application in the Browser
+
+- Open your browser and enter the URL: [http://localhost/publicacion-app/public](http://localhost/publicacion-app/public). This should load the Laravel application.
+
+
+# Installing Laravel on Linux (requerimientos)
 
 This guide provides step-by-step instructions for installing Laravel on a Linux system.
 
