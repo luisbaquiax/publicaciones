@@ -791,6 +791,7 @@
             .dark\:to-zinc-900 {
                 --tw-gradient-to: #18181b var(--tw-gradient-to-position)
             }
+
             .dark\:text-white\/50 {
                 color: rgb(255 255 255 / 0.5)
             }
@@ -822,38 +823,62 @@
             <main class="mt-6">
                 <h1 class="text-white text-center mb-3" style="font-size: 30px"><strong>Registro</strong></h1>
                 <div class="col-6 mx-auto">
-                    <form>
+                    <form method="post" action="{{ route('users.create') }}">
+                        <div class="row">
+                            @if(session('success'))
+                                <div class="alert alert-danger" role="alert">
+                                    {{ session('success') }}
+                                </div
+                            @endif
+                            @if(session('not-success'))
+                                <div class="alert alert-danger" role="alert">
+                                    {{ session('not-success') }}
+                                </div
+                            @endif
+                        </div>
+                        @csrf
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label text-white"><strong>Nombre:</strong></label>
-                                    <input name="nombre" type="text" class="form-control" id="nombre">
+                                    <input name="nombre" type="text" class="form-control" id="nombre" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="password" class="form-label text-white"><strong>Apellido:</strong></label>
-                                    <input name="password" type="password" class="form-control" id="password" >
+                                    <label for="apellido"
+                                           class="form-label text-white"><strong>Apellido:</strong></label>
+                                    <input name="apellido" type="text" class="form-control" id="apellido" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="password" class="form-label text-white"><strong>Telefono:</strong></label>
-                                    <input name="password" type="password" class="form-control" id="password" >
+                                    <label for="telefono"
+                                           class="form-label text-white"><strong>Telefono:</strong></label>
+                                    <input name="telefono" type="number" class="form-control" id="telefono" required
+                                           minlength="8" maxlength="8">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="email" class="form-label text-white"><strong>Correo electrónico:</strong></label>
-                                    <input name="password" type="password" class="form-control" id="password" >
+                                    <label for="email" class="form-label text-white"><strong>Correo
+                                            electrónico:</strong></label>
+                                    <input name="email" type="email" class="form-control" id="email" required>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="mb-3">
-                                    <label for="username" class="form-label text-white"><strong>Nombre de usuario:</strong></label>
-                                    <input name="username" type="text" class="form-control" id="username" aria-describedby="username">
+                                    <label for="username" class="form-label text-white"><strong>Nombre de
+                                            usuario:</strong></label>
+                                    <input name="username" type="text" class="form-control" id="username" required>
+                                    @if(session('ms-username'))
+                                        <span class="text-danger">{{ session('ms-username') }}</span>
+                                    @endif
                                 </div>
                                 <div class="mb-3">
-                                    <label for="password" class="form-label text-white"><strong>Contraseña:</strong></label>
-                                    <input name="password" type="password" class="form-control" id="password" >
+                                    <label for="password"
+                                           class="form-label text-white"><strong>Contraseña:</strong></label>
+                                    <input name="password" type="password" class="form-control" id="password" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="password" class="form-label text-white"><strong>Confirmar contraseña:</strong></label>
-                                    <input name="password" type="password" class="form-control" id="password" >
+                                    <label for="password_confirmation" class="form-label text-white"><strong>Confirmar
+                                            contraseña:</strong></label>
+                                    <input name="confirm_password" type="password" class="form-control"
+                                           id="confirm_password" required>
                                 </div>
                             </div>
                         </div>
@@ -861,7 +886,8 @@
                             <button type="submit" class="btn btn-danger bt-block w-100">Crear cuenta</button>
                         </div>
                         <div class="mb-3 text-center">
-                            <a href="{{ route("publicacion.list") }}" class="btn btn-danger w-50"><i class="fa-solid fa-angles-left"></i> Regresar</a>
+                            <a href="{{ route("publicacion.list") }}" class="btn btn-danger w-50"><i
+                                    class="fa-solid fa-angles-left"></i> Regresar</a>
                         </div>
                     </form>
                 </div>

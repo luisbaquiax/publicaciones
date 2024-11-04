@@ -28,8 +28,11 @@ Route::get("/admin/publicaciones", [ControllerPublicacion::class, "getAll"])->na
 Route::get("/form-publicacion", [ControllerPublicacion::class, "formPublicacion"])->name("publicacion.formPublicacion");
 Route::post("/createPublicacion", [ControllerPublicacion::class, "create"])->name("publicacion.create");
 Route::get("/updatePublicacion/{id}/estado/{estado}", [ControllerPublicacion::class, "updateState"])->name("publicacion.updateState");
+//users
 Route::post("/loginUser", [ControllerUsuario::class, "search"])->name("users.search");
 Route::get("/singout", [ControllerUsuario::class, "signOut"])->name("users.singout");
+Route::post("/crate", [ControllerUsuario::class, "store"])->name("users.create");
+//reports
 Route::post("/crearReporte", [ControllerReporte::class, "create"])->name("report.create");
 Route::get("/viewReports", [ControllerReporte::class, "list"])->name("report.list");
 Route::get("/updateReport/{id}/estado/{estado}", [ControllerReporte::class, "update"])->name("report.update");

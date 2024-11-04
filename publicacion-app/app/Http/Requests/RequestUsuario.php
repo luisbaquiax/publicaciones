@@ -26,7 +26,7 @@ class RequestUsuario extends FormRequest
             "apellido" => "required | min:1 | max:45 | string",
             "correo" => "required | min:1 | max:45 | string | email",
             "telefono"=>"required | min:1 | max:45 | integer | min:1 | max:45",
-            "username" => "required",
+            "username" => "required | min:1 | max:45 | string",
             "password" => "required",
             "password_confirmation" => "required",
         ];

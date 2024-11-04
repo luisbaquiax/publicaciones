@@ -102,7 +102,7 @@ class ControllerPublicacion extends Controller
     public function getAll()
     {
         return view('admin/admin-publicaciones')
-            ->with('publicaciones', Publicacion::all());
+            ->with('publicaciones', Publicacion::orderBy('fecha', 'desc')->get());
     }
 
     public function listByUsername($username)

@@ -834,11 +834,11 @@
                         @csrf
                         <div class="mb-3">
                             <label for="username" class="form-label text-white"><strong>Nombre de usuario:</strong></label>
-                            <input name="username" type="text" class="form-control" id="username" aria-describedby="username">
+                            <input name="username" type="text" class="form-control" id="username" required>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label text-white"><strong>Contraseña:</strong></label>
-                            <input name="password" type="password" class="form-control" id="password" >
+                            <input name="password" type="password" class="form-control" id="password" required>
                         </div>
                         <div class="mb-3">
                             <button type="submit" class="btn btn-danger bt-block w-100">Ingresar</button>
