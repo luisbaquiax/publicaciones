@@ -823,10 +823,10 @@
             <main class="mt-6">
                 <h1 class="text-white text-center mb-3" style="font-size: 30px"><strong>Registro</strong></h1>
                 <div class="col-6 mx-auto">
-                    <form method="post" action="{{ route('users.create') }}">
+                    <form method="post" action="@if(session('user')) {{ route('users.update') }} @else {{ route('users.create') }} @endif">
                         <div class="row">
                             @if(session('success'))
-                                <div class="alert alert-danger" role="alert">
+                                <div class="alert alert-success" role="alert">
                                     {{ session('success') }}
                                 </div
                             @endif
@@ -841,49 +841,58 @@
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label text-white"><strong>Nombre:</strong></label>
-                                    <input name="nombre" type="text" class="form-control" id="nombre" required>
+                                    <input name="nombre" type="text" class="form-control" id="nombre" required
+                                           value="@if(session('user')) {{ session('user')->nombre }} @endif">
                                 </div>
                                 <div class="mb-3">
                                     <label for="apellido"
                                            class="form-label text-white"><strong>Apellido:</strong></label>
-                                    <input name="apellido" type="text" class="form-control" id="apellido" required>
+                                    <input name="apellido" type="text" class="form-control" id="apellido" required
+                                           value="@if(session('user')) {{ session('user')->apellido }} @endif">
                                 </div>
                                 <div class="mb-3">
                                     <label for="telefono"
                                            class="form-label text-white"><strong>Telefono:</strong></label>
-                                    <input name="telefono" type="number" class="form-control" id="telefono" required
-                                           minlength="8" maxlength="8">
+                                    <input name="telefono" type="tel" class="form-control" id="telefono" required
+                                           minlength="8" maxlength="8"
+                                           value="@if(session('user')) {{ session('user')->telefono }} @endif">
                                 </div>
                                 <div class="mb-3">
                                     <label for="email" class="form-label text-white"><strong>Correo
                                             electrónico:</strong></label>
-                                    <input name="email" type="email" class="form-control" id="email" required>
+                                    <input name="email" type="email" class="form-control" id="email" required
+                                           value="@if(session('user')) {{ session('user')->email }} @endif">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="username" class="form-label text-white"><strong>Nombre de
                                             usuario:</strong></label>
-                                    <input name="username" type="text" class="form-control" id="username" required>
+                                    <input name="username" type="text" class="form-control" id="username" required
+                                           value="@if(session('user')) {{ session('user')->username }} @endif">
                                     @if(session('ms-username'))
                                         <span class="text-danger">{{ session('ms-username') }}</span>
                                     @endif
                                 </div>
-                                <div class="mb-3">
-                                    <label for="password"
-                                           class="form-label text-white"><strong>Contraseña:</strong></label>
-                                    <input name="password" type="password" class="form-control" id="password" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="password_confirmation" class="form-label text-white"><strong>Confirmar
-                                            contraseña:</strong></label>
-                                    <input name="confirm_password" type="password" class="form-control"
-                                           id="confirm_password" required>
-                                </div>
+                                @if(session('user') == null)
+                                    <div class="mb-3" >
+                                        <label for="password"
+                                               class="form-label text-white"><strong>Contraseña:</strong></label>
+                                        <input name="password" type="password" class="form-control" id="password" required>
+                                    </div>
+                                @endif
+                                @if(session('user') == null)
+                                    <div class="mb-3" >
+                                        <label for="password_confirmation" class="form-label text-white"><strong>Confirmar
+                                                contraseña:</strong></label>
+                                        <input name="confirm_password" type="password" class="form-control"
+                                               id="confirm_password" required>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         <div class="mb-3">
-                            <button type="submit" class="btn btn-danger bt-block w-100">Crear cuenta</button>
+                            <button type="submit" class="btn btn-danger bt-block w-100">@if(session('user')) Guardar Cambios @else Crear cuenta @endif</button>
                         </div>
                         <div class="mb-3 text-center">
                             <a href="{{ route("publicacion.list") }}" class="btn btn-danger w-50"><i

@@ -32,6 +32,7 @@ Route::get("/updatePublicacion/{id}/estado/{estado}", [ControllerPublicacion::cl
 Route::post("/loginUser", [ControllerUsuario::class, "search"])->name("users.search");
 Route::get("/singout", [ControllerUsuario::class, "signOut"])->name("users.singout");
 Route::post("/crate", [ControllerUsuario::class, "store"])->name("users.create");
+Route::post("/userUpdate", [ControllerUsuario::class, "update"])->name("users.update");
 //reports
 Route::post("/crearReporte", [ControllerReporte::class, "create"])->name("report.create");
 Route::get("/viewReports", [ControllerReporte::class, "list"])->name("report.list");

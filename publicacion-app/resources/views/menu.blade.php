@@ -27,7 +27,7 @@
                         <i class="fa-solid fa-user mx-2"></i>{{ session("user")->username }}
                     </button>
                     <ul class="dropdown-menu bg-dark" style="left: -30px">
-                        <li><a class="dropdown-item bg-dark text-white" href="#">Mi perfil</a></li>
+                        <li><a class="dropdown-item bg-dark text-white" href="/singup">Mi perfil</a></li>
                         <li><a class="dropdown-item bg-dark text-white"
                                href="{{ route("users.mispublicaciones", session("user")->username) }}">Mis
                                 publicaciones</a></li>
